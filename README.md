@@ -19,6 +19,20 @@ mingw32-make CC=gcc -j5 && dir glob.dll
 
 You may define `LIBSASS_INCLUDE_DIR` and `LIBSASS_LIBRARY_DIR` separately!
 
+## Examples
+
+```sass
+@import "lib*.scss"
+@import "**/*.scss"
+```
+
+Only globstar (`**`) and asterisk (`*`) wildcards are supported so far.
+
+## Caveats
+
+- Not really tested in the wild
+- May not work with unicode filenames
+
 ## Copyright
 
 © 2016 [Marcel Greter] [5]
