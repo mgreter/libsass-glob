@@ -122,13 +122,33 @@ namespace FS {
 		}
 	}
 
+	// helper to compare/sort pointer objects
+	static bool comparePtrToNode(Entry* a, Entry* b)
+	{
+		// may be same object
+		if (a == b) return true;
+		// move nulls to top
+		if (a == NULL) return true;
+		if (b == NULL) return false;
+		// query if directories
+		bool isDirA = a->isDirectory();
+		bool isDirB = b->isDirectory();
+		// only one directory
+		if (isDirA != isDirB) {
+			// move directory up
+			return b->isDirectory();
+		}
+		// should move up
+		return (*a < *b);
+	}
+
 	// main method to get our sub children
 	const std::vector<Entry*>& Entry::getEntries()
 	{
 		// special directory nodes contain the same as parent or grandparent node
 		// we should force collapse here to avoid that we read them multiple times
 		// need to account for reference matching with how we store the path found
-		if (true && parent && this != parent) {
+		if (collapse && parent && this != parent) {
 			if (name == ".") return parent->getEntries();
 			if (name == "..") return parent->parent->getEntries();
 		}
@@ -158,7 +178,7 @@ namespace FS {
 		this->fetched = true;
 		this->loaded = true;
 		// enfore alphanumeric order
-		std::sort(entries.begin(), entries.end());
+		std::sort(entries.begin(), entries.end(), comparePtrToNode);
 			// return entries
 		return this->entries;
 	}

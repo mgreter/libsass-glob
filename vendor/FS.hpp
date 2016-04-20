@@ -69,6 +69,12 @@ namespace FS {
 			}
 
 		public:
+			bool operator<(Entry rhs) const
+			{
+				return name < rhs.name;
+			}
+
+		public:
 			// copy constructor
 			/* Entry(const Entry& entry) :
 				matched(entry.matched),
@@ -92,7 +98,7 @@ namespace FS {
 				return *this;
 			} */
 
-		protected:
+		public:
 			// test if node is a directory
 			bool isDirectory()
 			{
