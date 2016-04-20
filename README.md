@@ -1,6 +1,3 @@
-This is no implementation and only demo functionality!
-This serves only as a base for such an implementation!
-
 # Libsass Glob Plugin
 
 Native libsass plugin for glob-based imports

@@ -18,13 +18,13 @@ set(LIBSASS_LIBRARY_DIR "${LIBSASS_DIR}/lib" CACHE FILEPATH "Path to libsass lib
 set(LIBSASS_INCLUDE_DIR "${LIBSASS_DIR}/include" CACHE FILEPATH "Path to libsass includes")
 
 link_directories("${LIBSASS_LIBRARY_DIR}" "${LIBSASS_DIR}")
-include_directories("${LIBSASS_INCLUDE_DIR}" "${LIBSASS_DIR}")
+include_directories("${LIBSASS_INCLUDE_DIR}" "${LIBSASS_DIR}" "vendor")
 
-add_library(glob SHARED src/glob.cpp)
+add_library(glob SHARED vendor/FS.cpp src/glob.cpp)
 
 find_library(SASS_LIBRARY NAMES sass
     HINTS "${CMAKE_CURRENT_SOURCE_DIR}/../lib"
 )
 
-target_include_directories(glob PUBLIC ../include)
+target_include_directories(glob PUBLIC ../include ../boost)
 target_link_libraries(glob LINK_PUBLIC sass)
