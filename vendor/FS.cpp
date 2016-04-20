@@ -12,6 +12,7 @@ namespace FS {
 	{
 
 		// naked asterisk pattern does not match these
+		if (pattern == "" && text == "/") return true;
 		if (pattern == "*" && text[0] == '.') return false;
 		if (pattern == "*" && text[0] == '$') return false;
 		if (pattern == "*") return text != "." && text != "..";
@@ -111,7 +112,8 @@ namespace FS {
 		else if (parent) {
 			// return base plus current
 			std::string base(parent->path());
-			return base + "/" + this->name;
+			if (base != "/") base += "/";
+			return base + this->name;
 		}
 		// should not happen?
 		else {

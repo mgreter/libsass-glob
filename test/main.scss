@@ -1,1 +1,3 @@
-@import "lib*.scss"
+top { main: head; }
+@import "lib*.scss";
+bottom { main: foot; }
