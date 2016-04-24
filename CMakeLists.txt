@@ -21,13 +21,15 @@ link_directories("${LIBSASS_LIBRARY_DIR}")
 include_directories("${LIBSASS_INCLUDE_DIR}")
 include_directories("vendor")
 
-find_library(SASS_LIBRARY sass)
-
-if(NOT SASS_LIBRARY)
-	message( FATAL_ERROR "sass library was not found" )
-endif()
+find_library(SASS_LIBRARY NAMES sass
+    HINTS "${CMAKE_CURRENT_SOURCE_DIR}/../lib"
+)
 
 add_library(glob SHARED vendor/FS.cpp src/glob.cpp)
 target_include_directories(glob PUBLIC)
 target_link_libraries(glob LINK_PUBLIC sass)
 
+# errors wrongly sometimes?
+# if(NOT SASS_LIBRARY)
+# 	message( FATAL_ERROR "sass library was not found" )
+# endif()
