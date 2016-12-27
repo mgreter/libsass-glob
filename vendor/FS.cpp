@@ -8,7 +8,7 @@ namespace FS {
 	// http://stackoverflow.com/q/30823596/1550314
 	// not sure if this work 100% correctly with backtracking
 	// but good starting point to add more pattern matchings
-	static bool pmatch(const std::string& text, const std::string& pattern)
+	bool pmatch(const std::string& text, const std::string& pattern)
 	{
 
 		// naked asterisk pattern does not match these
