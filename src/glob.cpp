@@ -36,20 +36,15 @@ Sass_Import_List glob_importer(const char* cur_path, Sass_Importer_Entry cb, str
   Sass_Import_List incs = sass_make_import_list(matches.size());
 
   // iterate over the list and print out the results
-  std::vector<FS::Entry*>::const_iterator it = matches.begin();
-  std::vector<FS::Entry*>::const_iterator end = matches.end();
-
-  // attach import entry for each match
-  size_t i = 0; while (i < matches.size()) {
+  for (size_t i = 0; i < matches.size(); ++i) {
     // create intermediate string object
-    std::string path(matches[i]->path());
+    std::string path = matches[i]->path();
     // create the resolved import entries (paths to be loaded)
-    incs[i ++ ] = sass_make_import(path.c_str(), path.c_str(), 0, 0);
+    incs[i] = sass_make_import(path.c_str(), path.c_str(), 0, 0);
   }
 
   // return imports
   return incs;
-
 }
 
 // entry point for libsass to request custom importers from plugin
